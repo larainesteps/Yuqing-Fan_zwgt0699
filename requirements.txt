@@ -1,0 +1,14 @@
+# Python dependencies for the four services in services/.
+# Only these two are imported directly; everything else is pulled in by ortools.
+#
+# Versions are those used to produce the results reported in Chapter 5.
+# Install with:  python -m pip install -r requirements.txt
+
+ortools==9.15.6755
+pydantic==2.13.4
+
+# Resolved transitively by ortools, recorded here for reference:
+#   absl-py==2.5.0
+#   numpy==2.5.2
+#   pandas==3.0.5
+#   protobuf==6.33.6
