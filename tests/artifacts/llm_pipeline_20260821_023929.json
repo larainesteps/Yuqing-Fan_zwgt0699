@@ -1,0 +1,1529 @@
+{
+  "summary": {
+    "status": "PASS_WITH_WARNINGS",
+    "generated_at": "2026-08-21T02:39:46.565281+00:00",
+    "generator_model": "codex-conversation-llm",
+    "case_count": 6,
+    "services": {
+      "nlp": "implemented-with-no-key-fallback",
+      "priority": "implemented-deterministic-policy",
+      "optimizer": "implemented-cp-sat-with-exact-fallback",
+      "evaluation": "implemented-deterministic-metrics"
+    },
+    "generation_checks": {
+      "urgency_distribution": {
+        "EMERGENCY": 1,
+        "URGENT": 2,
+        "EXPEDITED": 1,
+        "ROUTINE": 2
+      },
+      "unique_notes": 6
+    },
+    "nlp_quality": {
+      "openai_extractions": 6,
+      "urgency_accuracy": 1.0,
+      "speciality_accuracy": 0.8333,
+      "mean_procedure_token_recall": 0.8167,
+      "mean_duration_error_minutes": 0.0
+    },
+    "priority_distribution": {
+      "EMERGENCY": 1,
+      "URGENT": 2,
+      "EXPEDITED": 1,
+      "ROUTINE": 2
+    },
+    "optimization": {
+      "algorithm": "CP_BRANCH_AND_BOUND_V1",
+      "solver_status": "OPTIMAL",
+      "scheduled_cases": 6,
+      "unscheduled_cases": 0,
+      "independent_conflicts": 0,
+      "average_waiting_hours": 3.33,
+      "independent_average_waiting_hours": 3.33,
+      "independent_deadline_breaches": 2,
+      "theatre_utilisation_percent": 8.33
+    },
+    "evaluation": {
+      "scheduled_rate": 1.0,
+      "total_conflicts": 0,
+      "deadline_breaches": 2,
+      "doctor_workload_cv": 0.9957,
+      "jain_fairness_index": 0.5021
+    },
+    "failures": [],
+    "warnings": [
+      "LLM-E2E-20260821023929-03: speciality wording differs (Orthopaedics vs Orthopaedic surgery)",
+      "LLM-E2E-20260821023929-05: low procedure token recall 0.4",
+      "optimizer result quality: 2 scheduled case(s) exceeded their clinical deadline"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "LLM-E2E-20260821023929-01",
+      "expected": {
+        "note_text": "A de-identified 73-year-old patient has a ruptured abdominal aortic aneurysm with haemodynamic instability. Emergency open aneurysm repair is required immediately by a vascular surgeon and an anaesthetist. Estimated operating time is 180 minutes with three theatre nurses in a vascular operating theatre, followed by an ICU bed.",
+        "expected_procedure": "Emergency open repair of ruptured abdominal aortic aneurysm",
+        "expected_speciality": "Vascular Surgery",
+        "expected_urgency": "EMERGENCY",
+        "expected_duration_minutes": 180,
+        "expected_doctor_roles": [
+          "vascular_surgeon",
+          "anaesthetist"
+        ],
+        "expected_nurses": 3,
+        "expected_theatre_type": "vascular",
+        "expected_bed_type": "ICU"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-01",
+        "procedure": "Emergency open aneurysm repair",
+        "speciality": "Vascular surgery",
+        "urgency": "EMERGENCY",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 180,
+        "maximum_delay_hours": 0,
+        "required_doctors": [
+          "vascular surgeon",
+          "anaesthetist"
+        ],
+        "required_nurses": 3,
+        "required_theatre_type": "vascular operating theatre",
+        "required_bed_type": "ICU bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 1.0,
+        "human_review_required": false,
+        "evidence": [
+          "\"ruptured abdominal aortic aneurysm\"",
+          "\"Emergency open aneurysm repair\"",
+          "\"required immediately by a vascular surgeon and an anaesthetist\"",
+          "\"Estimated operating time is 180 minutes\"",
+          "\"three theatre nurses in a vascular operating theatre\"",
+          "\"followed by an ICU bed\""
+        ],
+        "urgency_confidence": 1.0,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 0,
+        "urgency_evidence": [
+          "\"Emergency open aneurysm repair is required immediately\""
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-01",
+        "priority_score": 85.0,
+        "priority_level": "EMERGENCY",
+        "components": {
+          "clinical_urgency": 60.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 25.0,
+          "confidence_adjustment": -0.0,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency EMERGENCY contributes 60.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "The case has an immediate scheduling window, so deadline risk is maximal."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:33.372508Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": true,
+        "procedure_token_recall": 0.5,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    },
+    {
+      "case_id": "LLM-E2E-20260821023929-02",
+      "expected": {
+        "note_text": "A de-identified 29-year-old patient has acute appendicitis with localized peritonitis. Urgent laparoscopic appendectomy is required within 12 hours by a general surgeon and an anaesthetist. The estimated procedure duration is 75 minutes with two theatre nurses in a general operating theatre and postoperative care in a ward bed.",
+        "expected_procedure": "Laparoscopic appendectomy",
+        "expected_speciality": "General Surgery",
+        "expected_urgency": "URGENT",
+        "expected_duration_minutes": 75,
+        "expected_doctor_roles": [
+          "general_surgeon",
+          "anaesthetist"
+        ],
+        "expected_nurses": 2,
+        "expected_theatre_type": "general",
+        "expected_bed_type": "WARD"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-02",
+        "procedure": "Laparoscopic appendectomy",
+        "speciality": "General surgery",
+        "urgency": "URGENT",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 75,
+        "maximum_delay_hours": 12,
+        "required_doctors": [
+          "General surgeon",
+          "Anaesthetist"
+        ],
+        "required_nurses": 2,
+        "required_theatre_type": "General operating theatre",
+        "required_bed_type": "Ward bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 0.99,
+        "human_review_required": false,
+        "evidence": [
+          "acute appendicitis with localized peritonitis",
+          "Urgent laparoscopic appendectomy is required within 12 hours",
+          "by a general surgeon and an anaesthetist",
+          "estimated procedure duration is 75 minutes",
+          "two theatre nurses",
+          "general operating theatre",
+          "postoperative care in a ward bed"
+        ],
+        "urgency_confidence": 0.99,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 12,
+        "urgency_evidence": [
+          "Urgent laparoscopic appendectomy is required within 12 hours"
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-02",
+        "priority_score": 44.95,
+        "priority_level": "URGENT",
+        "components": {
+          "clinical_urgency": 45.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 0.0,
+          "confidence_adjustment": -0.05,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency URGENT contributes 45.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "0.0% of the 12.0-hour scheduling window has elapsed.",
+          "Extraction confidence 0.99 applies a -0.05-point adjustment."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:35.308213Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": true,
+        "procedure_token_recall": 1.0,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    },
+    {
+      "case_id": "LLM-E2E-20260821023929-03",
+      "expected": {
+        "note_text": "A de-identified 46-year-old patient has an unstable displaced ankle fracture. Expedited open reduction and internal fixation should take place within 72 hours under an orthopaedic surgeon and an anaesthetist. Estimated operating time is 120 minutes with two theatre nurses in an orthopaedic theatre, followed by a ward bed.",
+        "expected_procedure": "Open reduction and internal fixation of ankle fracture",
+        "expected_speciality": "Orthopaedics",
+        "expected_urgency": "EXPEDITED",
+        "expected_duration_minutes": 120,
+        "expected_doctor_roles": [
+          "orthopaedic_surgeon",
+          "anaesthetist"
+        ],
+        "expected_nurses": 2,
+        "expected_theatre_type": "orthopaedic",
+        "expected_bed_type": "WARD"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-03",
+        "procedure": "Open reduction and internal fixation of unstable displaced ankle fracture",
+        "speciality": "Orthopaedic surgery",
+        "urgency": "EXPEDITED",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 120,
+        "maximum_delay_hours": 72,
+        "required_doctors": [
+          "Orthopaedic surgeon",
+          "Anaesthetist"
+        ],
+        "required_nurses": 2,
+        "required_theatre_type": "Orthopaedic theatre",
+        "required_bed_type": "Ward bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 1.0,
+        "human_review_required": false,
+        "evidence": [
+          "\"unstable displaced ankle fracture\"",
+          "\"Expedited open reduction and internal fixation\"",
+          "\"within 72 hours\"",
+          "\"under an orthopaedic surgeon and an anaesthetist\"",
+          "\"Estimated operating time is 120 minutes\"",
+          "\"two theatre nurses\"",
+          "\"in an orthopaedic theatre\"",
+          "\"followed by a ward bed\""
+        ],
+        "urgency_confidence": 1.0,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 72,
+        "urgency_evidence": [
+          "\"Expedited open reduction and internal fixation\"",
+          "\"within 72 hours\""
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-03",
+        "priority_score": 30.0,
+        "priority_level": "EXPEDITED",
+        "components": {
+          "clinical_urgency": 30.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 0.0,
+          "confidence_adjustment": -0.0,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency EXPEDITED contributes 30.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "0.0% of the 72.0-hour scheduling window has elapsed."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:37.294184Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": false,
+        "procedure_token_recall": 1.0,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    },
+    {
+      "case_id": "LLM-E2E-20260821023929-04",
+      "expected": {
+        "note_text": "A de-identified 68-year-old patient has a visually significant cataract. Routine phacoemulsification with intraocular lens implantation is requested within eight weeks by an ophthalmic surgeon. Estimated operating time is 45 minutes with one theatre nurse in an ophthalmic day-surgery theatre and a day-case recovery bed.",
+        "expected_procedure": "Phacoemulsification with intraocular lens implantation",
+        "expected_speciality": "Ophthalmology",
+        "expected_urgency": "ROUTINE",
+        "expected_duration_minutes": 45,
+        "expected_doctor_roles": [
+          "ophthalmic_surgeon"
+        ],
+        "expected_nurses": 1,
+        "expected_theatre_type": "ophthalmic",
+        "expected_bed_type": "DAY_CASE"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-04",
+        "procedure": "Phacoemulsification with intraocular lens implantation",
+        "speciality": "Ophthalmology",
+        "urgency": "ROUTINE",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 45,
+        "maximum_delay_hours": 1344,
+        "required_doctors": [
+          "Ophthalmic surgeon"
+        ],
+        "required_nurses": 1,
+        "required_theatre_type": "Ophthalmic day-surgery theatre",
+        "required_bed_type": "Day-case recovery bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 0.99,
+        "human_review_required": false,
+        "evidence": [
+          "\"Routine phacoemulsification with intraocular lens implantation\"",
+          "\"requested within eight weeks by an ophthalmic surgeon\"",
+          "\"Estimated operating time is 45 minutes\"",
+          "\"one theatre nurse\"",
+          "\"an ophthalmic day-surgery theatre\"",
+          "\"a day-case recovery bed\""
+        ],
+        "urgency_confidence": 0.99,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 1344,
+        "urgency_evidence": [
+          "\"Routine phacoemulsification\"",
+          "\"requested within eight weeks\""
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-04",
+        "priority_score": 14.95,
+        "priority_level": "ROUTINE",
+        "components": {
+          "clinical_urgency": 15.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 0.0,
+          "confidence_adjustment": -0.05,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency ROUTINE contributes 15.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "0.0% of the 1344.0-hour scheduling window has elapsed.",
+          "Extraction confidence 0.99 applies a -0.05-point adjustment."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:39.909764Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": true,
+        "procedure_token_recall": 1.0,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    },
+    {
+      "case_id": "LLM-E2E-20260821023929-05",
+      "expected": {
+        "note_text": "A de-identified 55-year-old patient has an acute subdural haematoma with neurological deterioration. Urgent decompressive craniectomy is required within six hours by a neurosurgeon and an anaesthetist. The operation is expected to last 210 minutes with three theatre nurses in a neurosurgical theatre and requires an ICU bed afterwards.",
+        "expected_procedure": "Decompressive craniectomy for acute subdural haematoma",
+        "expected_speciality": "Neurosurgery",
+        "expected_urgency": "URGENT",
+        "expected_duration_minutes": 210,
+        "expected_doctor_roles": [
+          "neurosurgeon",
+          "anaesthetist"
+        ],
+        "expected_nurses": 3,
+        "expected_theatre_type": "neurosurgical",
+        "expected_bed_type": "ICU"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-05",
+        "procedure": "Decompressive craniectomy",
+        "speciality": "Neurosurgery",
+        "urgency": "URGENT",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 210,
+        "maximum_delay_hours": 6,
+        "required_doctors": [
+          "neurosurgeon",
+          "anaesthetist"
+        ],
+        "required_nurses": 3,
+        "required_theatre_type": "neurosurgical theatre",
+        "required_bed_type": "ICU bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 1.0,
+        "human_review_required": false,
+        "evidence": [
+          "acute subdural haematoma with neurological deterioration",
+          "Urgent decompressive craniectomy is required within six hours",
+          "by a neurosurgeon and an anaesthetist",
+          "expected to last 210 minutes",
+          "with three theatre nurses in a neurosurgical theatre",
+          "requires an ICU bed afterwards"
+        ],
+        "urgency_confidence": 1.0,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 6,
+        "urgency_evidence": [
+          "Urgent decompressive craniectomy is required within six hours"
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-05",
+        "priority_score": 45.0,
+        "priority_level": "URGENT",
+        "components": {
+          "clinical_urgency": 45.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 0.0,
+          "confidence_adjustment": -0.0,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency URGENT contributes 45.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "0.0% of the 6.0-hour scheduling window has elapsed."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:42.406523Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": true,
+        "procedure_token_recall": 0.4,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    },
+    {
+      "case_id": "LLM-E2E-20260821023929-06",
+      "expected": {
+        "note_text": "A de-identified 19-year-old patient has recurrent tonsillitis. Routine bilateral tonsillectomy is requested within four weeks by an ENT surgeon and an anaesthetist. Estimated operating time is 60 minutes with two theatre nurses in an ENT theatre and a day-case recovery bed.",
+        "expected_procedure": "Bilateral tonsillectomy",
+        "expected_speciality": "ENT",
+        "expected_urgency": "ROUTINE",
+        "expected_duration_minutes": 60,
+        "expected_doctor_roles": [
+          "ENT_surgeon",
+          "anaesthetist"
+        ],
+        "expected_nurses": 2,
+        "expected_theatre_type": "ENT",
+        "expected_bed_type": "DAY_CASE"
+      },
+      "extraction": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-06",
+        "procedure": "Bilateral tonsillectomy",
+        "speciality": "ENT",
+        "urgency": "ROUTINE",
+        "requested_datetime": "2026-08-21T03:00:00Z",
+        "estimated_duration_minutes": 60,
+        "maximum_delay_hours": 672,
+        "required_doctors": [
+          "ENT surgeon",
+          "Anaesthetist"
+        ],
+        "required_nurses": 2,
+        "required_theatre_type": "ENT theatre",
+        "required_bed_type": "Day-case recovery bed",
+        "constraints": {
+          "deidentified": true,
+          "source": "llm-e2e-test",
+          "provisional_values_require_review": false
+        },
+        "confidence": 1.0,
+        "human_review_required": false,
+        "evidence": [
+          "\"Routine bilateral tonsillectomy\"",
+          "\"within four weeks\"",
+          "\"by an ENT surgeon and an anaesthetist\"",
+          "\"Estimated operating time is 60 minutes\"",
+          "\"two theatre nurses\"",
+          "\"in an ENT theatre\"",
+          "\"a day-case recovery bed\""
+        ],
+        "urgency_confidence": 1.0,
+        "urgency_source": "explicit",
+        "recommended_time_window_hours": 672,
+        "urgency_evidence": [
+          "\"Routine bilateral tonsillectomy\"",
+          "\"within four weeks\""
+        ],
+        "warnings": [],
+        "extractor_version": "openai:gpt-5.6-luna"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "LLM-E2E-20260821023929-06",
+        "priority_score": 15.0,
+        "priority_level": "ROUTINE",
+        "components": {
+          "clinical_urgency": 15.0,
+          "waiting_time": 0.0,
+          "deadline_risk": 0.0,
+          "confidence_adjustment": -0.0,
+          "review_adjustment": 0.0
+        },
+        "explanation": [
+          "Clinical urgency ROUTINE contributes 15.0 points.",
+          "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+          "0.0% of the 672.0-hour scheduling window has elapsed."
+        ],
+        "policy_version": "priority-v1.0",
+        "assessed_at": "2026-08-21T02:39:45.389563Z"
+      },
+      "checks": {
+        "openai_used": true,
+        "urgency_match": true,
+        "speciality_match": true,
+        "procedure_token_recall": 1.0,
+        "duration_error_minutes": 0,
+        "priority_not_downgraded": true
+      }
+    }
+  ],
+  "optimization_request": {
+    "contract_version": "v1",
+    "run_id": "LLM-E2E-RUN-20260821023929",
+    "horizon_start": "2026-08-21T03:00:00+00:00",
+    "horizon_end": "2026-08-21T15:00:00+00:00",
+    "slot_minutes": 30,
+    "max_solve_seconds": 30,
+    "cases": [
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-01",
+          "procedure": "Emergency open aneurysm repair",
+          "speciality": "Vascular surgery",
+          "urgency": "EMERGENCY",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 180,
+          "maximum_delay_hours": 0,
+          "required_doctors": [
+            "vascular surgeon",
+            "anaesthetist"
+          ],
+          "required_nurses": 3,
+          "required_theatre_type": "vascular operating theatre",
+          "required_bed_type": "ICU bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 1.0,
+          "human_review_required": false,
+          "evidence": [
+            "\"ruptured abdominal aortic aneurysm\"",
+            "\"Emergency open aneurysm repair\"",
+            "\"required immediately by a vascular surgeon and an anaesthetist\"",
+            "\"Estimated operating time is 180 minutes\"",
+            "\"three theatre nurses in a vascular operating theatre\"",
+            "\"followed by an ICU bed\""
+          ],
+          "urgency_confidence": 1.0,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 0,
+          "urgency_evidence": [
+            "\"Emergency open aneurysm repair is required immediately\""
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-01",
+          "priority_score": 85.0,
+          "priority_level": "EMERGENCY",
+          "components": {
+            "clinical_urgency": 60.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 25.0,
+            "confidence_adjustment": -0.0,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency EMERGENCY contributes 60.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "The case has an immediate scheduling window, so deadline risk is maximal."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:33.372508Z"
+        }
+      },
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-02",
+          "procedure": "Laparoscopic appendectomy",
+          "speciality": "General surgery",
+          "urgency": "URGENT",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 75,
+          "maximum_delay_hours": 12,
+          "required_doctors": [
+            "General surgeon",
+            "Anaesthetist"
+          ],
+          "required_nurses": 2,
+          "required_theatre_type": "General operating theatre",
+          "required_bed_type": "Ward bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 0.99,
+          "human_review_required": false,
+          "evidence": [
+            "acute appendicitis with localized peritonitis",
+            "Urgent laparoscopic appendectomy is required within 12 hours",
+            "by a general surgeon and an anaesthetist",
+            "estimated procedure duration is 75 minutes",
+            "two theatre nurses",
+            "general operating theatre",
+            "postoperative care in a ward bed"
+          ],
+          "urgency_confidence": 0.99,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 12,
+          "urgency_evidence": [
+            "Urgent laparoscopic appendectomy is required within 12 hours"
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-02",
+          "priority_score": 44.95,
+          "priority_level": "URGENT",
+          "components": {
+            "clinical_urgency": 45.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 0.0,
+            "confidence_adjustment": -0.05,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency URGENT contributes 45.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "0.0% of the 12.0-hour scheduling window has elapsed.",
+            "Extraction confidence 0.99 applies a -0.05-point adjustment."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:35.308213Z"
+        }
+      },
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-03",
+          "procedure": "Open reduction and internal fixation of unstable displaced ankle fracture",
+          "speciality": "Orthopaedic surgery",
+          "urgency": "EXPEDITED",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 120,
+          "maximum_delay_hours": 72,
+          "required_doctors": [
+            "Orthopaedic surgeon",
+            "Anaesthetist"
+          ],
+          "required_nurses": 2,
+          "required_theatre_type": "Orthopaedic theatre",
+          "required_bed_type": "Ward bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 1.0,
+          "human_review_required": false,
+          "evidence": [
+            "\"unstable displaced ankle fracture\"",
+            "\"Expedited open reduction and internal fixation\"",
+            "\"within 72 hours\"",
+            "\"under an orthopaedic surgeon and an anaesthetist\"",
+            "\"Estimated operating time is 120 minutes\"",
+            "\"two theatre nurses\"",
+            "\"in an orthopaedic theatre\"",
+            "\"followed by a ward bed\""
+          ],
+          "urgency_confidence": 1.0,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 72,
+          "urgency_evidence": [
+            "\"Expedited open reduction and internal fixation\"",
+            "\"within 72 hours\""
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-03",
+          "priority_score": 30.0,
+          "priority_level": "EXPEDITED",
+          "components": {
+            "clinical_urgency": 30.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 0.0,
+            "confidence_adjustment": -0.0,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency EXPEDITED contributes 30.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "0.0% of the 72.0-hour scheduling window has elapsed."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:37.294184Z"
+        }
+      },
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-04",
+          "procedure": "Phacoemulsification with intraocular lens implantation",
+          "speciality": "Ophthalmology",
+          "urgency": "ROUTINE",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 45,
+          "maximum_delay_hours": 1344,
+          "required_doctors": [
+            "Ophthalmic surgeon"
+          ],
+          "required_nurses": 1,
+          "required_theatre_type": "Ophthalmic day-surgery theatre",
+          "required_bed_type": "Day-case recovery bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 0.99,
+          "human_review_required": false,
+          "evidence": [
+            "\"Routine phacoemulsification with intraocular lens implantation\"",
+            "\"requested within eight weeks by an ophthalmic surgeon\"",
+            "\"Estimated operating time is 45 minutes\"",
+            "\"one theatre nurse\"",
+            "\"an ophthalmic day-surgery theatre\"",
+            "\"a day-case recovery bed\""
+          ],
+          "urgency_confidence": 0.99,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 1344,
+          "urgency_evidence": [
+            "\"Routine phacoemulsification\"",
+            "\"requested within eight weeks\""
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-04",
+          "priority_score": 14.95,
+          "priority_level": "ROUTINE",
+          "components": {
+            "clinical_urgency": 15.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 0.0,
+            "confidence_adjustment": -0.05,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency ROUTINE contributes 15.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "0.0% of the 1344.0-hour scheduling window has elapsed.",
+            "Extraction confidence 0.99 applies a -0.05-point adjustment."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:39.909764Z"
+        }
+      },
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-05",
+          "procedure": "Decompressive craniectomy",
+          "speciality": "Neurosurgery",
+          "urgency": "URGENT",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 210,
+          "maximum_delay_hours": 6,
+          "required_doctors": [
+            "neurosurgeon",
+            "anaesthetist"
+          ],
+          "required_nurses": 3,
+          "required_theatre_type": "neurosurgical theatre",
+          "required_bed_type": "ICU bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 1.0,
+          "human_review_required": false,
+          "evidence": [
+            "acute subdural haematoma with neurological deterioration",
+            "Urgent decompressive craniectomy is required within six hours",
+            "by a neurosurgeon and an anaesthetist",
+            "expected to last 210 minutes",
+            "with three theatre nurses in a neurosurgical theatre",
+            "requires an ICU bed afterwards"
+          ],
+          "urgency_confidence": 1.0,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 6,
+          "urgency_evidence": [
+            "Urgent decompressive craniectomy is required within six hours"
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-05",
+          "priority_score": 45.0,
+          "priority_level": "URGENT",
+          "components": {
+            "clinical_urgency": 45.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 0.0,
+            "confidence_adjustment": -0.0,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency URGENT contributes 45.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "0.0% of the 6.0-hour scheduling window has elapsed."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:42.406523Z"
+        }
+      },
+      {
+        "case": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-06",
+          "procedure": "Bilateral tonsillectomy",
+          "speciality": "ENT",
+          "urgency": "ROUTINE",
+          "requested_datetime": "2026-08-21T03:00:00Z",
+          "estimated_duration_minutes": 60,
+          "maximum_delay_hours": 672,
+          "required_doctors": [
+            "ENT surgeon",
+            "Anaesthetist"
+          ],
+          "required_nurses": 2,
+          "required_theatre_type": "ENT theatre",
+          "required_bed_type": "Day-case recovery bed",
+          "constraints": {
+            "deidentified": true,
+            "source": "llm-e2e-test",
+            "provisional_values_require_review": false
+          },
+          "confidence": 1.0,
+          "human_review_required": false,
+          "evidence": [
+            "\"Routine bilateral tonsillectomy\"",
+            "\"within four weeks\"",
+            "\"by an ENT surgeon and an anaesthetist\"",
+            "\"Estimated operating time is 60 minutes\"",
+            "\"two theatre nurses\"",
+            "\"in an ENT theatre\"",
+            "\"a day-case recovery bed\""
+          ],
+          "urgency_confidence": 1.0,
+          "urgency_source": "explicit",
+          "recommended_time_window_hours": 672,
+          "urgency_evidence": [
+            "\"Routine bilateral tonsillectomy\"",
+            "\"within four weeks\""
+          ],
+          "warnings": [],
+          "extractor_version": "openai:gpt-5.6-luna"
+        },
+        "priority": {
+          "contract_version": "v1",
+          "case_id": "LLM-E2E-20260821023929-06",
+          "priority_score": 15.0,
+          "priority_level": "ROUTINE",
+          "components": {
+            "clinical_urgency": 15.0,
+            "waiting_time": 0.0,
+            "deadline_risk": 0.0,
+            "confidence_adjustment": -0.0,
+            "review_adjustment": 0.0
+          },
+          "explanation": [
+            "Clinical urgency ROUTINE contributes 15.0 points.",
+            "Case has waited 0.0 hours and receives 0.0 waiting-time points.",
+            "0.0% of the 672.0-hour scheduling window has elapsed."
+          ],
+          "policy_version": "priority-v1.0",
+          "assessed_at": "2026-08-21T02:39:45.389563Z"
+        }
+      }
+    ],
+    "resources": [
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_ANAESTHETIST_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "Anaesthetist"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_ENT_SURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "ENT surgeon"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_GENERAL_SURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "General surgeon"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_OPHTHALMIC_SURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "Ophthalmic surgeon"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_ORTHOPAEDIC_SURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "Orthopaedic surgeon"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_ANAESTHETIST_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "anaesthetist"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_NEUROSURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "neurosurgeon"
+        }
+      },
+      {
+        "resource_type": "doctor",
+        "resource_code": "DOC_VASCULAR_SURGEON_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "role": "vascular surgeon"
+        }
+      },
+      {
+        "resource_type": "nurse",
+        "resource_code": "NURSE_GENERAL_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "nurse",
+        "resource_code": "NURSE_GENERAL_2",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "nurse",
+        "resource_code": "NURSE_GENERAL_3",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_ENT_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "ENT theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_GENERAL_OPERATING_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "General operating theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_OPHTHALMIC_DAY_SURGERY_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "Ophthalmic day-surgery theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_ORTHOPAEDIC_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "Orthopaedic theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_NEUROSURGICAL_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "neurosurgical theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_VASCULAR_OPERATING_THEATRE",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "theatre_type": "vascular operating theatre"
+        }
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_ENT",
+        "speciality": "ENT",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_GENERAL_SURGERY",
+        "speciality": "General surgery",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_NEUROSURGERY",
+        "speciality": "Neurosurgery",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_OPHTHALMOLOGY",
+        "speciality": "Ophthalmology",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_ORTHOPAEDIC_SURGERY",
+        "speciality": "Orthopaedic surgery",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "theatre",
+        "resource_code": "THEATRE_SPEC_VASCULAR_SURGERY",
+        "speciality": "Vascular surgery",
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {}
+      },
+      {
+        "resource_type": "bed",
+        "resource_code": "BED_DAY_CASE_RECOVERY_BED_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "bed_type": "Day-case recovery bed"
+        }
+      },
+      {
+        "resource_type": "bed",
+        "resource_code": "BED_ICU_BED_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "bed_type": "ICU bed"
+        }
+      },
+      {
+        "resource_type": "bed",
+        "resource_code": "BED_WARD_BED_1",
+        "speciality": null,
+        "available_from": "2026-08-21T03:00:00+00:00",
+        "available_to": "2026-08-21T15:00:00+00:00",
+        "attributes": {
+          "bed_type": "Ward bed"
+        }
+      }
+    ],
+    "locked_assignments": [],
+    "objective_weights": {
+      "unscheduled_penalty": 1000,
+      "priority": 10,
+      "weighted_delay": 2
+    }
+  },
+  "optimization_result": {
+    "contract_version": "v1",
+    "run_id": "LLM-E2E-RUN-20260821023929",
+    "algorithm": "CP_BRANCH_AND_BOUND_V1",
+    "solver_status": "OPTIMAL",
+    "objective_value": 8335.05,
+    "best_bound": 8335.05,
+    "optimality_gap": 0.0,
+    "runtime_ms": 1162,
+    "allocations": [
+      {
+        "case_id": "LLM-E2E-20260821023929-01",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T04:30:00Z",
+        "end_datetime": "2026-08-21T07:30:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_VASCULAR_SURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ANAESTHETIST_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_2",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_3",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_VASCULAR_OPERATING_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_ICU_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      },
+      {
+        "case_id": "LLM-E2E-20260821023929-02",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T03:00:00Z",
+        "end_datetime": "2026-08-21T04:30:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_GENERAL_SURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ANAESTHETIST_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_2",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_GENERAL_OPERATING_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_WARD_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      },
+      {
+        "case_id": "LLM-E2E-20260821023929-03",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T07:30:00Z",
+        "end_datetime": "2026-08-21T09:30:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ORTHOPAEDIC_SURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ANAESTHETIST_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_2",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_ORTHOPAEDIC_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_WARD_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      },
+      {
+        "case_id": "LLM-E2E-20260821023929-04",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T03:00:00Z",
+        "end_datetime": "2026-08-21T04:00:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_OPHTHALMIC_SURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_3",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_OPHTHALMIC_DAY_SURGERY_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_DAY_CASE_RECOVERY_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      },
+      {
+        "case_id": "LLM-E2E-20260821023929-05",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T10:30:00Z",
+        "end_datetime": "2026-08-21T14:00:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_NEUROSURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ANAESTHETIST_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_2",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_3",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_NEUROSURGICAL_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_ICU_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      },
+      {
+        "case_id": "LLM-E2E-20260821023929-06",
+        "status": "SCHEDULED",
+        "start_datetime": "2026-08-21T09:30:00Z",
+        "end_datetime": "2026-08-21T10:30:00Z",
+        "resources": [
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ENT_SURGEON_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "doctor",
+            "resource_code": "DOC_ANAESTHETIST_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_1",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "nurse",
+            "resource_code": "NURSE_GENERAL_2",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "theatre",
+            "resource_code": "THEATRE_ENT_THEATRE",
+            "stage": "procedure"
+          },
+          {
+            "resource_type": "bed",
+            "resource_code": "BED_DAY_CASE_RECOVERY_BED_1",
+            "stage": "procedure"
+          }
+        ],
+        "rejection_reason": null
+      }
+    ],
+    "metrics": {
+      "scheduled_cases": 6,
+      "unscheduled_cases": 0,
+      "scheduled_minutes": 690,
+      "scheduled_priority_points": 234.9,
+      "resource_assignments": 36,
+      "average_waiting_hours": 3.33,
+      "max_waiting_hours": 7.5,
+      "deadline_breaches": 2,
+      "theatre_utilisation_percent": 8.33
+    },
+    "generated_at": "2026-08-21T02:39:46.561735Z"
+  },
+  "evaluation_report": {
+    "contract_version": "v1",
+    "run_id": "LLM-E2E-RUN-20260821023929",
+    "baseline_run_id": null,
+    "algorithm": "CP_BRANCH_AND_BOUND_V1",
+    "metrics": {
+      "scheduled_cases": 6,
+      "unscheduled_cases": 0,
+      "scheduled_minutes": 690,
+      "scheduled_priority_points": 234.9,
+      "resource_assignments": 36,
+      "average_waiting_hours": 3.33,
+      "max_waiting_hours": 7.5,
+      "deadline_breaches": 2,
+      "theatre_utilisation_percent": 8.33,
+      "total_cases": 6,
+      "scheduled_rate": 1.0,
+      "scheduled_percent": 100.0,
+      "total_conflicts": 0,
+      "conflict_free": 1,
+      "runtime_ms": 1162,
+      "optimality_gap": 0.0,
+      "observed_schedule_minutes": 660.0,
+      "observed_doctor_utilisation_percent": 29.87,
+      "observed_nurse_utilisation_percent": 89.39,
+      "observed_theatre_utilisation_percent": 18.18,
+      "observed_bed_utilisation_percent": 36.36
+    },
+    "conflicts_by_resource": {
+      "doctor": 0,
+      "nurse": 0,
+      "theatre": 0,
+      "bed": 0
+    },
+    "workload_summary": {
+      "doctor_count": 7,
+      "total_doctor_minutes": 1380.0,
+      "mean_doctor_minutes": 197.14,
+      "doctor_workload_stddev": 196.3,
+      "doctor_workload_cv": 0.9957,
+      "doctor_workload_gini": 0.4534,
+      "jain_fairness_index": 0.5021,
+      "min_doctor_minutes": 60.0,
+      "max_doctor_minutes": 660.0
+    },
+    "notes": [
+      "Metrics generated by evaluation-v1.0.",
+      "Observed utilisation uses the first scheduled start and last scheduled end as its denominator.",
+      "No overlapping assignments were detected for any named resource."
+    ],
+    "generated_at": "2026-08-21T02:39:46.564282Z"
+  }
+}

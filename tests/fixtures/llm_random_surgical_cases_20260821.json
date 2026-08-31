@@ -1,0 +1,71 @@
+{
+  "generator_model": "codex-conversation-llm",
+  "cases": [
+    {
+      "note_text": "A de-identified 73-year-old patient has a ruptured abdominal aortic aneurysm with haemodynamic instability. Emergency open aneurysm repair is required immediately by a vascular surgeon and an anaesthetist. Estimated operating time is 180 minutes with three theatre nurses in a vascular operating theatre, followed by an ICU bed.",
+      "expected_procedure": "Emergency open repair of ruptured abdominal aortic aneurysm",
+      "expected_speciality": "Vascular Surgery",
+      "expected_urgency": "EMERGENCY",
+      "expected_duration_minutes": 180,
+      "expected_doctor_roles": ["vascular_surgeon", "anaesthetist"],
+      "expected_nurses": 3,
+      "expected_theatre_type": "vascular",
+      "expected_bed_type": "ICU"
+    },
+    {
+      "note_text": "A de-identified 29-year-old patient has acute appendicitis with localized peritonitis. Urgent laparoscopic appendectomy is required within 12 hours by a general surgeon and an anaesthetist. The estimated procedure duration is 75 minutes with two theatre nurses in a general operating theatre and postoperative care in a ward bed.",
+      "expected_procedure": "Laparoscopic appendectomy",
+      "expected_speciality": "General Surgery",
+      "expected_urgency": "URGENT",
+      "expected_duration_minutes": 75,
+      "expected_doctor_roles": ["general_surgeon", "anaesthetist"],
+      "expected_nurses": 2,
+      "expected_theatre_type": "general",
+      "expected_bed_type": "WARD"
+    },
+    {
+      "note_text": "A de-identified 46-year-old patient has an unstable displaced ankle fracture. Expedited open reduction and internal fixation should take place within 72 hours under an orthopaedic surgeon and an anaesthetist. Estimated operating time is 120 minutes with two theatre nurses in an orthopaedic theatre, followed by a ward bed.",
+      "expected_procedure": "Open reduction and internal fixation of ankle fracture",
+      "expected_speciality": "Orthopaedics",
+      "expected_urgency": "EXPEDITED",
+      "expected_duration_minutes": 120,
+      "expected_doctor_roles": ["orthopaedic_surgeon", "anaesthetist"],
+      "expected_nurses": 2,
+      "expected_theatre_type": "orthopaedic",
+      "expected_bed_type": "WARD"
+    },
+    {
+      "note_text": "A de-identified 68-year-old patient has a visually significant cataract. Routine phacoemulsification with intraocular lens implantation is requested within eight weeks by an ophthalmic surgeon. Estimated operating time is 45 minutes with one theatre nurse in an ophthalmic day-surgery theatre and a day-case recovery bed.",
+      "expected_procedure": "Phacoemulsification with intraocular lens implantation",
+      "expected_speciality": "Ophthalmology",
+      "expected_urgency": "ROUTINE",
+      "expected_duration_minutes": 45,
+      "expected_doctor_roles": ["ophthalmic_surgeon"],
+      "expected_nurses": 1,
+      "expected_theatre_type": "ophthalmic",
+      "expected_bed_type": "DAY_CASE"
+    },
+    {
+      "note_text": "A de-identified 55-year-old patient has an acute subdural haematoma with neurological deterioration. Urgent decompressive craniectomy is required within six hours by a neurosurgeon and an anaesthetist. The operation is expected to last 210 minutes with three theatre nurses in a neurosurgical theatre and requires an ICU bed afterwards.",
+      "expected_procedure": "Decompressive craniectomy for acute subdural haematoma",
+      "expected_speciality": "Neurosurgery",
+      "expected_urgency": "URGENT",
+      "expected_duration_minutes": 210,
+      "expected_doctor_roles": ["neurosurgeon", "anaesthetist"],
+      "expected_nurses": 3,
+      "expected_theatre_type": "neurosurgical",
+      "expected_bed_type": "ICU"
+    },
+    {
+      "note_text": "A de-identified 19-year-old patient has recurrent tonsillitis. Routine bilateral tonsillectomy is requested within four weeks by an ENT surgeon and an anaesthetist. Estimated operating time is 60 minutes with two theatre nurses in an ENT theatre and a day-case recovery bed.",
+      "expected_procedure": "Bilateral tonsillectomy",
+      "expected_speciality": "ENT",
+      "expected_urgency": "ROUTINE",
+      "expected_duration_minutes": 60,
+      "expected_doctor_roles": ["ENT_surgeon", "anaesthetist"],
+      "expected_nurses": 2,
+      "expected_theatre_type": "ENT",
+      "expected_bed_type": "DAY_CASE"
+    }
+  ]
+}
