@@ -1,0 +1,39 @@
+# --- dependencies ---
+node_modules/
+.npm-cache/
+.pnpm-home/
+.pnpm-store/
+
+# --- build output ---
+dist/
+build/
+*.tsbuildinfo
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# --- logs ---
+*.log
+
+# --- secrets and local configuration ---
+.env
+.env.backup-*
+.env.*.backup
+
+# --- IDE: run configurations are committed; only per-user state is ignored ---
+.idea/workspace.xml
+.idea/shelf/
+.idea/usage.statistics.xml
+.idea/httpRequests/
+
+# --- editor backups ---
+*.bak
+*.orig
+*~
+
+# --- OS ---
+Thumbs.db
+desktop.ini
