@@ -1,0 +1,27 @@
+# cmd.exe requires CRLF. A .cmd file checked out with LF endings does not merely look wrong:
+# multi-line `if (...) else (...)` blocks are mis-parsed, both branches run, and REM comment
+# text is executed as a command. Every script in scripts/ was affected until 2026-08-29.
+*.cmd  text eol=crlf
+*.bat  text eol=crlf
+
+# PowerShell tolerates LF, but keeping the Windows tooling consistent avoids surprises when
+# a file is edited in an editor that follows the file's existing endings.
+*.ps1  text eol=crlf
+
+# Everything else is normalised to LF in the repository and checked out as-is.
+*.ts       text eol=lf
+*.tsx      text eol=lf
+*.mjs      text eol=lf
+*.js       text eol=lf
+*.py       text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.sql      text eol=lf
+*.css      text eol=lf
+*.yml      text eol=lf
+
+# Binary assets must never be line-ending converted.
+*.png      binary
+*.docx     binary
+*.svg      text eol=lf
+*.csv      text eol=lf
