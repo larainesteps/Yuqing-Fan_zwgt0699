@@ -1,0 +1,69 @@
+{
+  "exportedAt": "2026-08-29T04:43:51.659Z",
+  "sourceDataNotice": "All configured case scales are deterministic subsets of unique cases in the real imported source workflow; no bootstrap replay is used.",
+  "comparison": {
+    "suiteKey": "EXP-20260825012438-42",
+    "sourceRunKey": "WF-20260821223642",
+    "sourceCaseCount": 100,
+    "status": "COMPLETED",
+    "config": {
+      "scenarios": [
+        "BASELINE",
+        "RESOURCE_MODERATE",
+        "RESOURCE_TIGHT",
+        "EMERGENCY_SURGE"
+      ],
+      "suiteType": "COMPARISON",
+      "algorithms": [
+        "PRIORITY_GREEDY",
+        "PURE_CP_SAT",
+        "HYBRID_PRIORITY_CP_SAT"
+      ],
+      "caseCounts": [
+        10,
+        25,
+        50
+      ],
+      "randomSeed": 42,
+      "repetitions": 5,
+      "scalingMethod": "deterministic-source-subset",
+      "maxSolveSeconds": 20,
+      "sourceCaseCount": 100
+    },
+    "rawResultCount": 180,
+    "summaryResultCount": 36
+  },
+  "ablation": {
+    "suiteKey": "ABL-20260825014044-42",
+    "sourceRunKey": "WF-20260821223642",
+    "sourceCaseCount": 100,
+    "status": "COMPLETED",
+    "config": {
+      "scenarios": [
+        "BASELINE",
+        "RESOURCE_MODERATE",
+        "RESOURCE_TIGHT",
+        "EMERGENCY_SURGE"
+      ],
+      "suiteType": "ABLATION",
+      "algorithms": [
+        "HYBRID_PRIORITY_CP_SAT",
+        "ABLATION_NO_PRIORITY",
+        "ABLATION_NO_WAITING",
+        "ABLATION_THROUGHPUT_ONLY"
+      ],
+      "caseCounts": [
+        10,
+        25,
+        50
+      ],
+      "randomSeed": 42,
+      "repetitions": 5,
+      "scalingMethod": "deterministic-source-subset",
+      "maxSolveSeconds": 20,
+      "sourceCaseCount": 100
+    },
+    "rawResultCount": 240,
+    "summaryResultCount": 48
+  }
+}

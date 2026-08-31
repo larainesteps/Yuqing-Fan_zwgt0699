@@ -1,0 +1,67 @@
+{
+  "exportedAt": "2026-08-21T22:09:04.686Z",
+  "sourceDataNotice": "The source workflow contains real imported project records. Case-count scaling uses deterministic bootstrap replay and must not be described as additional real patients.",
+  "comparison": {
+    "suiteKey": "EXP-20260821220654-42",
+    "sourceRunKey": "WF-20260821033243",
+    "sourceCaseCount": 6,
+    "status": "COMPLETED",
+    "config": {
+      "scenarios": [
+        "BASELINE",
+        "RESOURCE_TIGHT",
+        "EMERGENCY_SURGE"
+      ],
+      "suiteType": "COMPARISON",
+      "algorithms": [
+        "PRIORITY_GREEDY",
+        "PURE_CP_SAT",
+        "HYBRID_PRIORITY_CP_SAT"
+      ],
+      "caseCounts": [
+        10,
+        25,
+        50
+      ],
+      "randomSeed": 42,
+      "repetitions": 3,
+      "scalingMethod": "deterministic-bootstrap-replay",
+      "maxSolveSeconds": 5,
+      "sourceCaseCount": 6
+    },
+    "rawResultCount": 81,
+    "summaryResultCount": 27
+  },
+  "ablation": {
+    "suiteKey": "ABL-20260821220722-42",
+    "sourceRunKey": "WF-20260821033243",
+    "sourceCaseCount": 6,
+    "status": "COMPLETED",
+    "config": {
+      "scenarios": [
+        "BASELINE",
+        "RESOURCE_TIGHT",
+        "EMERGENCY_SURGE"
+      ],
+      "suiteType": "ABLATION",
+      "algorithms": [
+        "HYBRID_PRIORITY_CP_SAT",
+        "ABLATION_NO_PRIORITY",
+        "ABLATION_NO_WAITING",
+        "ABLATION_THROUGHPUT_ONLY"
+      ],
+      "caseCounts": [
+        10,
+        25,
+        50
+      ],
+      "randomSeed": 42,
+      "repetitions": 3,
+      "scalingMethod": "deterministic-bootstrap-replay",
+      "maxSolveSeconds": 5,
+      "sourceCaseCount": 6
+    },
+    "rawResultCount": 108,
+    "summaryResultCount": 36
+  }
+}
