@@ -1,0 +1,95 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "baseline_run_id": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baseline Run Id"
+    },
+    "algorithm": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Algorithm",
+      "type": "string"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "conflicts_by_resource": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Conflicts By Resource",
+      "type": "object"
+    },
+    "workload_summary": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "title": "Workload Summary",
+      "type": "object"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "algorithm",
+    "metrics",
+    "conflicts_by_resource",
+    "generated_at"
+  ],
+  "title": "EvaluationReport",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/evaluation-report.schema.json",
+  "x-contract-version": "v1"
+}

@@ -1,0 +1,21 @@
+{
+  "contract_version": "v1",
+  "run_id": "RUN-DEMO-001",
+  "baseline_run_id": "RUN-GREEDY-001",
+  "algorithm": "CP_SAT_V1",
+  "metrics": {
+    "scheduled_rate": 1.0,
+    "weighted_delay_hours": 23.0,
+    "theatre_utilisation": 0.8,
+    "runtime_ms": 1530
+  },
+  "conflicts_by_resource": {
+    "doctor": 0,
+    "nurse": 0,
+    "theatre": 0,
+    "bed": 0
+  },
+  "workload_summary": {"fairness_index": 0.91},
+  "notes": ["Synthetic P0 contract sample"],
+  "generated_at": "2026-08-20T09:12:00+01:00"
+}

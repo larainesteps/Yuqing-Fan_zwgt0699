@@ -1,0 +1,509 @@
+{
+  "$defs": {
+    "CaseExtraction": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v1",
+          "default": "v1",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "procedure": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Procedure",
+          "type": "string"
+        },
+        "speciality": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Speciality",
+          "type": "string"
+        },
+        "urgency": {
+          "$ref": "#/$defs/Urgency"
+        },
+        "requested_datetime": {
+          "format": "date-time",
+          "title": "Requested Datetime",
+          "type": "string"
+        },
+        "estimated_duration_minutes": {
+          "maximum": 1440,
+          "minimum": 15,
+          "title": "Estimated Duration Minutes",
+          "type": "integer"
+        },
+        "maximum_delay_hours": {
+          "maximum": 8760,
+          "minimum": 0,
+          "title": "Maximum Delay Hours",
+          "type": "integer"
+        },
+        "required_doctors": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Required Doctors",
+          "type": "array"
+        },
+        "required_nurses": {
+          "default": 1,
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Required Nurses",
+          "type": "integer"
+        },
+        "required_theatre_type": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required Theatre Type"
+        },
+        "required_bed_type": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required Bed Type"
+        },
+        "constraints": {
+          "title": "Constraints",
+          "type": "object"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "human_review_required": {
+          "title": "Human Review Required",
+          "type": "boolean"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "urgency_confidence": {
+          "default": 0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Urgency Confidence",
+          "type": "number"
+        },
+        "urgency_source": {
+          "default": "unknown",
+          "enum": [
+            "explicit",
+            "inferred",
+            "unknown"
+          ],
+          "title": "Urgency Source",
+          "type": "string"
+        },
+        "recommended_time_window_hours": {
+          "anyOf": [
+            {
+              "maximum": 8760,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recommended Time Window Hours"
+        },
+        "urgency_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Urgency Evidence",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Warnings",
+          "type": "array"
+        },
+        "extractor_version": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Extractor Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case_id",
+        "procedure",
+        "speciality",
+        "urgency",
+        "requested_datetime",
+        "estimated_duration_minutes",
+        "maximum_delay_hours",
+        "confidence",
+        "human_review_required",
+        "extractor_version"
+      ],
+      "title": "CaseExtraction",
+      "type": "object"
+    },
+    "LockedAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "start_datetime": {
+          "format": "date-time",
+          "title": "Start Datetime",
+          "type": "string"
+        },
+        "end_datetime": {
+          "format": "date-time",
+          "title": "End Datetime",
+          "type": "string"
+        },
+        "resource_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resource Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "case_id",
+        "start_datetime",
+        "end_datetime"
+      ],
+      "title": "LockedAssignment",
+      "type": "object"
+    },
+    "OptimizationCase": {
+      "additionalProperties": false,
+      "properties": {
+        "case": {
+          "$ref": "#/$defs/CaseExtraction"
+        },
+        "priority": {
+          "$ref": "#/$defs/PriorityAssessment"
+        }
+      },
+      "required": [
+        "case",
+        "priority"
+      ],
+      "title": "OptimizationCase",
+      "type": "object"
+    },
+    "PreferredAssignment": {
+      "additionalProperties": false,
+      "description": "A previous allocation that the optimizer should preserve when feasible.",
+      "properties": {
+        "case_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "start_datetime": {
+          "format": "date-time",
+          "title": "Start Datetime",
+          "type": "string"
+        },
+        "end_datetime": {
+          "format": "date-time",
+          "title": "End Datetime",
+          "type": "string"
+        },
+        "resource_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resource Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "case_id",
+        "start_datetime",
+        "end_datetime"
+      ],
+      "title": "PreferredAssignment",
+      "type": "object"
+    },
+    "PriorityAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "v1",
+          "default": "v1",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "priority_score": {
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "priority_level": {
+          "$ref": "#/$defs/Urgency"
+        },
+        "components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "explanation": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Explanation",
+          "type": "array"
+        },
+        "policy_version": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "assessed_at": {
+          "format": "date-time",
+          "title": "Assessed At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case_id",
+        "priority_score",
+        "priority_level",
+        "components",
+        "policy_version",
+        "assessed_at"
+      ],
+      "title": "PriorityAssessment",
+      "type": "object"
+    },
+    "ResourceAvailability": {
+      "additionalProperties": false,
+      "properties": {
+        "resource_type": {
+          "$ref": "#/$defs/ResourceType"
+        },
+        "resource_code": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Resource Code",
+          "type": "string"
+        },
+        "speciality": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Speciality"
+        },
+        "available_from": {
+          "format": "date-time",
+          "title": "Available From",
+          "type": "string"
+        },
+        "available_to": {
+          "format": "date-time",
+          "title": "Available To",
+          "type": "string"
+        },
+        "attributes": {
+          "title": "Attributes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "resource_type",
+        "resource_code",
+        "available_from",
+        "available_to"
+      ],
+      "title": "ResourceAvailability",
+      "type": "object"
+    },
+    "ResourceType": {
+      "enum": [
+        "doctor",
+        "nurse",
+        "theatre",
+        "bed"
+      ],
+      "title": "ResourceType",
+      "type": "string"
+    },
+    "Urgency": {
+      "enum": [
+        "UNKNOWN",
+        "ROUTINE",
+        "EXPEDITED",
+        "URGENT",
+        "EMERGENCY"
+      ],
+      "title": "Urgency",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "horizon_start": {
+      "format": "date-time",
+      "title": "Horizon Start",
+      "type": "string"
+    },
+    "horizon_end": {
+      "format": "date-time",
+      "title": "Horizon End",
+      "type": "string"
+    },
+    "slot_minutes": {
+      "default": 30,
+      "maximum": 60,
+      "minimum": 5,
+      "title": "Slot Minutes",
+      "type": "integer"
+    },
+    "max_solve_seconds": {
+      "default": 60,
+      "maximum": 3600,
+      "minimum": 1,
+      "title": "Max Solve Seconds",
+      "type": "integer"
+    },
+    "solver_engine": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "cp-sat",
+        "fallback",
+        "priority-greedy"
+      ],
+      "title": "Solver Engine",
+      "type": "string"
+    },
+    "random_seed": {
+      "default": 42,
+      "maximum": 2147483647,
+      "minimum": 0,
+      "title": "Random Seed",
+      "type": "integer"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/OptimizationCase"
+      },
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    },
+    "resources": {
+      "items": {
+        "$ref": "#/$defs/ResourceAvailability"
+      },
+      "minItems": 1,
+      "title": "Resources",
+      "type": "array"
+    },
+    "locked_assignments": {
+      "items": {
+        "$ref": "#/$defs/LockedAssignment"
+      },
+      "title": "Locked Assignments",
+      "type": "array"
+    },
+    "preferred_assignments": {
+      "items": {
+        "$ref": "#/$defs/PreferredAssignment"
+      },
+      "title": "Preferred Assignments",
+      "type": "array"
+    },
+    "objective_weights": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Objective Weights",
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "horizon_start",
+    "horizon_end",
+    "cases",
+    "resources"
+  ],
+  "title": "OptimizationRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/optimization-request.schema.json",
+  "x-contract-version": "v1"
+}

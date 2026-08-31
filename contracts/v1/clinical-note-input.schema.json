@@ -1,0 +1,64 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Case Id",
+      "type": "string"
+    },
+    "note_text": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Note Text",
+      "type": "string"
+    },
+    "language": {
+      "default": "en",
+      "maxLength": 20,
+      "minLength": 2,
+      "title": "Language",
+      "type": "string"
+    },
+    "source": {
+      "default": "synthetic",
+      "maxLength": 50,
+      "minLength": 1,
+      "title": "Source",
+      "type": "string"
+    },
+    "deidentified": {
+      "default": true,
+      "title": "Deidentified",
+      "type": "boolean"
+    },
+    "submitted_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Submitted At"
+    }
+  },
+  "required": [
+    "case_id",
+    "note_text"
+  ],
+  "title": "ClinicalNoteInput",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/clinical-note-input.schema.json",
+  "x-contract-version": "v1"
+}

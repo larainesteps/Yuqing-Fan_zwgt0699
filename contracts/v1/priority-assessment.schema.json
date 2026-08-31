@@ -1,0 +1,78 @@
+{
+  "$defs": {
+    "Urgency": {
+      "enum": [
+        "UNKNOWN",
+        "ROUTINE",
+        "EXPEDITED",
+        "URGENT",
+        "EMERGENCY"
+      ],
+      "title": "Urgency",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Case Id",
+      "type": "string"
+    },
+    "priority_score": {
+      "maximum": 100.0,
+      "minimum": 0.0,
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "priority_level": {
+      "$ref": "#/$defs/Urgency"
+    },
+    "components": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Components",
+      "type": "object"
+    },
+    "explanation": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Explanation",
+      "type": "array"
+    },
+    "policy_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "assessed_at": {
+      "format": "date-time",
+      "title": "Assessed At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "priority_score",
+    "priority_level",
+    "components",
+    "policy_version",
+    "assessed_at"
+  ],
+  "title": "PriorityAssessment",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/priority-assessment.schema.json",
+  "x-contract-version": "v1"
+}

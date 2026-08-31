@@ -1,0 +1,9 @@
+{
+  "contract_version": "v1",
+  "case_id": "CASE-DEMO-001",
+  "note_text": "The patient has acute appendicitis with increasing abdominal pain and fever. Emergency laparoscopic appendectomy is required immediately and should start within 6 hours. The expected operating time is 75 minutes.",
+  "language": "en",
+  "source": "synthetic",
+  "deidentified": true,
+  "submitted_at": "2026-08-20T09:00:00+01:00"
+}

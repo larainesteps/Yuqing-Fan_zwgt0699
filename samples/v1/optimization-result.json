@@ -1,0 +1,25 @@
+{
+  "contract_version": "v1",
+  "run_id": "RUN-DEMO-001",
+  "algorithm": "CP_SAT_V1",
+  "solver_status": "FEASIBLE",
+  "objective_value": 120.0,
+  "best_bound": 100.0,
+  "optimality_gap": 0.1667,
+  "runtime_ms": 1530,
+  "allocations": [
+    {
+      "case_id": "CASE-DEMO-001",
+      "status": "SCHEDULED",
+      "start_datetime": "2026-08-21T08:00:00+01:00",
+      "end_datetime": "2026-08-21T12:00:00+01:00",
+      "resources": [
+        {"resource_type": "doctor", "resource_code": "CARDIAC_SURGEON_01", "stage": "procedure"},
+        {"resource_type": "theatre", "resource_code": "CARDIAC_THEATRE_01", "stage": "procedure"}
+      ],
+      "rejection_reason": null
+    }
+  ],
+  "metrics": {"scheduled_cases": 1, "unscheduled_cases": 0},
+  "generated_at": "2026-08-20T09:10:00+01:00"
+}

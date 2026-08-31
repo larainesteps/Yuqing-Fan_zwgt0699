@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "Urgency": {
+      "enum": [
+        "UNKNOWN",
+        "ROUTINE",
+        "EXPEDITED",
+        "URGENT",
+        "EMERGENCY"
+      ],
+      "title": "Urgency",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Case Id",
+      "type": "string"
+    },
+    "procedure": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Procedure",
+      "type": "string"
+    },
+    "speciality": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Speciality",
+      "type": "string"
+    },
+    "urgency": {
+      "$ref": "#/$defs/Urgency"
+    },
+    "requested_datetime": {
+      "format": "date-time",
+      "title": "Requested Datetime",
+      "type": "string"
+    },
+    "estimated_duration_minutes": {
+      "maximum": 1440,
+      "minimum": 15,
+      "title": "Estimated Duration Minutes",
+      "type": "integer"
+    },
+    "maximum_delay_hours": {
+      "maximum": 8760,
+      "minimum": 0,
+      "title": "Maximum Delay Hours",
+      "type": "integer"
+    },
+    "required_doctors": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Required Doctors",
+      "type": "array"
+    },
+    "required_nurses": {
+      "default": 1,
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Required Nurses",
+      "type": "integer"
+    },
+    "required_theatre_type": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Required Theatre Type"
+    },
+    "required_bed_type": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Required Bed Type"
+    },
+    "constraints": {
+      "title": "Constraints",
+      "type": "object"
+    },
+    "confidence": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "human_review_required": {
+      "title": "Human Review Required",
+      "type": "boolean"
+    },
+    "evidence": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "urgency_confidence": {
+      "default": 0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Urgency Confidence",
+      "type": "number"
+    },
+    "urgency_source": {
+      "default": "unknown",
+      "enum": [
+        "explicit",
+        "inferred",
+        "unknown"
+      ],
+      "title": "Urgency Source",
+      "type": "string"
+    },
+    "recommended_time_window_hours": {
+      "anyOf": [
+        {
+          "maximum": 8760,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Recommended Time Window Hours"
+    },
+    "urgency_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Urgency Evidence",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Warnings",
+      "type": "array"
+    },
+    "extractor_version": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Extractor Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "procedure",
+    "speciality",
+    "urgency",
+    "requested_datetime",
+    "estimated_duration_minutes",
+    "maximum_delay_hours",
+    "confidence",
+    "human_review_required",
+    "extractor_version"
+  ],
+  "title": "CaseExtraction",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/case-extraction.schema.json",
+  "x-contract-version": "v1"
+}

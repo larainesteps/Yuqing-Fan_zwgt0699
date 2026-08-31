@@ -1,0 +1,32 @@
+[CmdletBinding()]
+param()
+
+$ErrorActionPreference = "Stop"
+
+Write-Host "TheatreFlow OpenAI configuration" -ForegroundColor Cyan
+Write-Host "Paste a newly created API key. The input will not be displayed."
+$secureKey = Read-Host "New OPENAI_API_KEY" -AsSecureString
+$keyPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureKey)
+
+try {
+    $plainKey = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($keyPointer)
+    if ([string]::IsNullOrWhiteSpace($plainKey) -or -not $plainKey.StartsWith("sk-")) {
+        throw "The value does not look like an OpenAI API key. Nothing was saved."
+    }
+
+    [Environment]::SetEnvironmentVariable("OPENAI_API_KEY", $plainKey, "User")
+    [Environment]::SetEnvironmentVariable("NLP_PROVIDER", "auto", "User")
+    [Environment]::SetEnvironmentVariable("NLP_OPENAI_MODEL", "gpt-5.6-luna", "User")
+    [Environment]::SetEnvironmentVariable("NLP_ALLOW_RULE_FALLBACK", "true", "User")
+
+    Write-Host "Configuration saved to Windows user environment variables." -ForegroundColor Green
+    Write-Host "The key was not written to the project or displayed."
+    Write-Host "Restart the NLP service to apply it."
+}
+finally {
+    if ($keyPointer -ne [IntPtr]::Zero) {
+        [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($keyPointer)
+    }
+    $plainKey = $null
+    $secureKey.Dispose()
+}

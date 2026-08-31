@@ -1,0 +1,254 @@
+{
+  "$defs": {
+    "AllocationStatus": {
+      "enum": [
+        "SCHEDULED",
+        "UNSCHEDULED"
+      ],
+      "title": "AllocationStatus",
+      "type": "string"
+    },
+    "RejectionCode": {
+      "enum": [
+        "DEADLINE_EXCEEDED",
+        "OUTSIDE_PLANNING_HORIZON",
+        "NO_MATCHING_THEATRE",
+        "DOCTOR_UNAVAILABLE",
+        "INSUFFICIENT_NURSES",
+        "NO_RECOVERY_BED",
+        "NO_COMMON_RESOURCE_WINDOW",
+        "CAPACITY_EXHAUSTED",
+        "LOCKED_ASSIGNMENT_CONFLICT"
+      ],
+      "title": "RejectionCode",
+      "type": "string"
+    },
+    "ResourceAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "resource_type": {
+          "$ref": "#/$defs/ResourceType"
+        },
+        "resource_code": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Resource Code",
+          "type": "string"
+        },
+        "stage": {
+          "default": "care",
+          "maxLength": 50,
+          "minLength": 1,
+          "title": "Stage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_type",
+        "resource_code"
+      ],
+      "title": "ResourceAssignment",
+      "type": "object"
+    },
+    "ResourceType": {
+      "enum": [
+        "doctor",
+        "nurse",
+        "theatre",
+        "bed"
+      ],
+      "title": "ResourceType",
+      "type": "string"
+    },
+    "ScheduledAllocation": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Case Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/AllocationStatus"
+        },
+        "start_datetime": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Datetime"
+        },
+        "end_datetime": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Datetime"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/$defs/ResourceAssignment"
+          },
+          "title": "Resources",
+          "type": "array"
+        },
+        "rejection_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RejectionCode"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "rejection_reason": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rejection Reason"
+        }
+      },
+      "required": [
+        "case_id",
+        "status"
+      ],
+      "title": "ScheduledAllocation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "v1",
+      "default": "v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "algorithm": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Algorithm",
+      "type": "string"
+    },
+    "solver_status": {
+      "enum": [
+        "OPTIMAL",
+        "FEASIBLE",
+        "INFEASIBLE",
+        "UNKNOWN",
+        "ERROR"
+      ],
+      "title": "Solver Status",
+      "type": "string"
+    },
+    "objective_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Objective Value"
+    },
+    "best_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Best Bound"
+    },
+    "optimality_gap": {
+      "anyOf": [
+        {
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Optimality Gap"
+    },
+    "runtime_ms": {
+      "minimum": 0,
+      "title": "Runtime Ms",
+      "type": "integer"
+    },
+    "allocations": {
+      "items": {
+        "$ref": "#/$defs/ScheduledAllocation"
+      },
+      "title": "Allocations",
+      "type": "array"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "algorithm",
+    "solver_status",
+    "runtime_ms",
+    "allocations",
+    "generated_at"
+  ],
+  "title": "OptimizationResult",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theatreflow.local/contracts/v1/optimization-result.schema.json",
+  "x-contract-version": "v1"
+}

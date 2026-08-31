@@ -1,0 +1,13 @@
+﻿metric,label,preferred_direction,rules,openai
+schema_valid_rate,Schema-valid rate,higher,1.0,1.0
+procedure_accuracy,Procedure exact accuracy,higher,0.89,1.0
+procedure_mean_token_recall,Procedure mean token recall,higher,0.9633,1.0
+speciality_accuracy,Speciality exact accuracy,higher,1.0,1.0
+urgency_accuracy,Urgency accuracy,higher,1.0,1.0
+urgency_macro_f1,Urgency Macro-F1,higher,1.0,1.0
+duration_mae_minutes,Duration MAE (minutes),lower,0.0,0.0
+time_window_mae_hours,Time-window MAE (hours),lower,0.0,0.0
+time_window_coverage,Time-window coverage,higher,1.0,1.0
+human_review_rate,Human-review rate,lower,0.0,0.0
+mean_latency_ms,Mean latency (ms),lower,0.29,3032.37
+p95_latency_ms,P95 latency (ms),lower,0.41,4526.44

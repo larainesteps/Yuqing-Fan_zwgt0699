@@ -1,0 +1,97 @@
+{
+  "contract_version": "v1",
+  "run_id": "RUN-DEMO-001",
+  "horizon_start": "2026-08-21T08:00:00+01:00",
+  "horizon_end": "2026-08-21T18:00:00+01:00",
+  "slot_minutes": 30,
+  "max_solve_seconds": 60,
+  "cases": [
+    {
+      "case": {
+        "contract_version": "v1",
+        "case_id": "CASE-DEMO-001",
+        "procedure": "Coronary artery bypass",
+        "speciality": "Cardiology",
+        "urgency": "URGENT",
+        "requested_datetime": "2026-08-20T09:00:00+01:00",
+        "estimated_duration_minutes": 240,
+        "maximum_delay_hours": 48,
+        "required_doctors": ["cardiac_surgeon", "anaesthetist"],
+        "required_nurses": 2,
+        "required_theatre_type": "cardiac",
+        "required_bed_type": "ICU",
+        "constraints": {},
+        "confidence": 0.91,
+        "human_review_required": false,
+        "evidence": ["recommended within 48 hours"],
+        "extractor_version": "mock-v1"
+      },
+      "priority": {
+        "contract_version": "v1",
+        "case_id": "CASE-DEMO-001",
+        "priority_score": 87.5,
+        "priority_level": "URGENT",
+        "components": {"clinical_urgency": 40.0, "deadline_risk": 25.0},
+        "explanation": ["Urgent cardiac procedure"],
+        "policy_version": "priority-v1",
+        "assessed_at": "2026-08-20T09:05:00+01:00"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "resource_type": "doctor",
+      "resource_code": "CARDIAC_SURGEON_01",
+      "speciality": "Cardiology",
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {"role": "cardiac_surgeon"}
+    },
+    {
+      "resource_type": "doctor",
+      "resource_code": "ANAESTHETIST_01",
+      "speciality": "Cardiology",
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {"role": "anaesthetist"}
+    },
+    {
+      "resource_type": "nurse",
+      "resource_code": "CARDIAC_NURSE_01",
+      "speciality": "Cardiology",
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {}
+    },
+    {
+      "resource_type": "nurse",
+      "resource_code": "CARDIAC_NURSE_02",
+      "speciality": "Cardiology",
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {}
+    },
+    {
+      "resource_type": "theatre",
+      "resource_code": "CARDIAC_THEATRE_01",
+      "speciality": "Cardiology",
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {"theatre_type": "cardiac"}
+    },
+    {
+      "resource_type": "bed",
+      "resource_code": "ICU_BED_01",
+      "speciality": null,
+      "available_from": "2026-08-21T08:00:00+01:00",
+      "available_to": "2026-08-21T18:00:00+01:00",
+      "attributes": {"bed_type": "ICU"}
+    }
+  ],
+  "locked_assignments": [],
+  "objective_weights": {
+    "unscheduled_penalty": 1000.0,
+    "weighted_delay": 10.0,
+    "overtime": 5.0
+  }
+}

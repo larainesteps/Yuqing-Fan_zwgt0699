@@ -1,0 +1,14 @@
+{
+  "contract_version": "v1",
+  "case_id": "CASE-DEMO-001",
+  "priority_score": 87.5,
+  "priority_level": "URGENT",
+  "components": {
+    "clinical_urgency": 40.0,
+    "waiting_time": 22.5,
+    "deadline_risk": 25.0
+  },
+  "explanation": ["Maximum delay is 48 hours", "Urgent cardiac procedure"],
+  "policy_version": "priority-v1",
+  "assessed_at": "2026-08-20T09:05:00+01:00"
+}
